@@ -18,6 +18,7 @@ local function BowlBundle(assets, x, y)
       offsetY = 3,
       size = 50,
     },
+    bowlContents = {},
   }
 end
 

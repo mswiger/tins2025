@@ -5,6 +5,7 @@ local HandBundle = require("game.bundles.HandBundle")
 local IngredientBundle = require("game.bundles.IngredientBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
 
+local BowlContentsSystem = require("game.systems.BowlContentsSystem")
 local GrabSystem = require("game.systems.GrabSystem")
 local HighlightSystem = require("game.systems.HighlightSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
@@ -33,7 +34,7 @@ local Application = class {
     self.camera = Camera(self.INTERNAL_RES_W / 2, self.INTERNAL_RES_H / 2, scaleFactor)
 
     self.cosmos = Cosmos()
-    self.cosmos:addSystems("primaryAction", GrabSystem())
+    self.cosmos:addSystems("primaryAction", BowlContentsSystem(), GrabSystem())
     self.cosmos:addSystems("update", HighlightSystem(self.camera))
     self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem())
 
