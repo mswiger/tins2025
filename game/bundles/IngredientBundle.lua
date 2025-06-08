@@ -3,6 +3,7 @@ local storageUtil = require("game.util.storage")
 local function IngredientBundle(assets, name, storage)
   local drawable = assets:get("assets/" .. name .. ".png")
   local x, y = storageUtil.computeStoragePos(storage, drawable)
+  storage.storage.filled = true
   return {
     name = name,
     drawable = drawable,

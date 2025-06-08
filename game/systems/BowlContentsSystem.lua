@@ -2,7 +2,7 @@ local collision = require("game.util.collision")
 
 local BowlContentsSystem = class {
   query = {
-    bowls = { "bowlContents", "progress" },
+    bowls = { "bowlContents", "progress", "position" },
     hand = { "hand" },
   },
 

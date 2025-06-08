@@ -52,7 +52,7 @@ local GrabSystem = class {
           itemStorage.position.y,
           itemStorage.size.width,
           itemStorage.size.height
-        ) then
+        ) and itemStorage.storage.type == heldItem.grabbable.storageType then
           local sx, sy = storageUtil.computeStoragePos(itemStorage, heldItem.drawable)
           itemStorage.storage.filled = true
           hand.holding = nil

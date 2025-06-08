@@ -44,9 +44,24 @@ local Application = class {
       drawable = self.assets:get("assets/background.png"),
       layer = 0,
     })
-    self.cosmos:spawn(BowlBundle(self.assets, 40, 143))
 
     self.cosmos:spawn(HandBundle())
+
+    local COUNTER_STORAGE_W = 100
+    local COUNTER_STORAGE_H = 100
+
+    local counter = {
+      StorageBundle(40, 99, COUNTER_STORAGE_W, COUNTER_STORAGE_H, "counter", "1"),
+      StorageBundle(140, 99, COUNTER_STORAGE_W, COUNTER_STORAGE_H, "counter", "2"),
+      StorageBundle(240, 99, COUNTER_STORAGE_W, COUNTER_STORAGE_H, "counter", "3"),
+      StorageBundle(340, 99, COUNTER_STORAGE_W, COUNTER_STORAGE_H, "counter", "4"),
+    }
+
+    for _, counterBundle in ipairs(counter) do
+      self.cosmos:spawn(counterBundle)
+    end
+
+    self.cosmos:spawn(BowlBundle(self.assets, counter[1]))
 
     local PANTRY_STORAGE_W = 62
     local PANTRY_STORAGE_H = 42

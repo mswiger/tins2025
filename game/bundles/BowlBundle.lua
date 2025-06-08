@@ -1,5 +1,9 @@
-local function BowlBundle(assets, x, y)
+local storageUtil = require("game.util.storage")
+
+local function BowlBundle(assets, storage)
   local drawable = assets:get("assets/bowl.png")
+  local x, y = storageUtil.computeStoragePos(storage, drawable)
+  storage.storage.filled = true
   return {
     name = "bowl",
     drawable = drawable,
@@ -17,6 +21,11 @@ local function BowlBundle(assets, x, y)
       offsetX = 85,
       offsetY = 3,
       size = 50,
+    },
+    grabbable = {
+      cursor = love.mouse.newCursor("assets/bowl.png"),
+      storageType = "counter",
+      storageId = storage.storage.id,
     },
     bowlContents = {},
   }
