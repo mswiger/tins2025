@@ -1,5 +1,8 @@
-local function FlourBundle(assets, x, y)
+local storageUtil = require("game.util.storage")
+
+local function FlourBundle(assets, storage)
   local drawable = assets:get("assets/flour.png")
+  local x, y = storageUtil.computeStoragePos(storage, drawable)
   return {
     name = "flour",
     drawable = drawable,
@@ -10,6 +13,11 @@ local function FlourBundle(assets, x, y)
     position = {
       x = x,
       y = y,
+    },
+    grabbable = {
+      cursor = love.mouse.newCursor("assets/flour.png"),
+      storageType = "pantry",
+      storageId = storage.storage.id,
     },
   }
 end
