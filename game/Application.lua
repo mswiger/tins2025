@@ -1,6 +1,7 @@
 local AssetManager = require("game.AssetManager")
 
 local BowlBundle = require("game.bundles.BowlBundle")
+local FlourBundle = require("game.bundles.FlourBundle")
 
 local HighlightSystem = require("game.systems.HighlightSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
@@ -33,6 +34,7 @@ local Application = class {
       layer = 0,
     })
     self.cosmos:spawn(BowlBundle(self.assets, 40, 143))
+    self.cosmos:spawn(FlourBundle(self.assets, 31, 220))
   end,
 
   update = function(self, dt)
