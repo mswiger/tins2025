@@ -89,7 +89,7 @@ local AssetManager = class {
       self.cache[key] = self.loaders[extension](self, path, ...)
     end
 
-    return self.cache[path]
+    return self.cache[key]
   end,
 
   registerLoader = function(self, extension, loader)

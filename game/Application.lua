@@ -13,7 +13,6 @@ local Application = class {
     love.graphics.setBackgroundColor(0.17, 0.12, 0.19)
 
     self.assets = AssetManager()
-    self.background = self.assets:get("assets/background.png")
 
     local scaleFactor = math.min(
       love.graphics.getWidth() / self.INTERNAL_RES_W,
@@ -24,6 +23,12 @@ local Application = class {
     self.cosmos = Cosmos()
     self.cosmos:addSystems("draw", RenderingSystem())
 
+    self.cosmos:spawn({
+      name = "background",
+      position = { x = 0, y = 0, },
+      drawable = self.assets:get("assets/background.png"),
+      layer = 0,
+    })
     self.cosmos:spawn(BowlBundle(self.assets, 40, 143))
   end,
 
@@ -33,8 +38,11 @@ local Application = class {
 
   draw = function(self)
     self.camera:attach()
-    love.graphics.draw(self.background, 0, 0)
     self.cosmos:emit("draw")
+    love.graphics.setFont(self.assets:get("assets/bitstream-vera-mono-bold.ttf", 18))
+    love.graphics.setColor(0.92, 0.15, 0.25)
+    love.graphics.print("00:30", 512, 19)
+    love.graphics.setColor(1, 1, 1, 1)
     self.camera:detach()
   end,
 }
