@@ -2,6 +2,7 @@ local AssetManager = require("game.AssetManager")
 
 local BowlBundle = require("game.bundles.BowlBundle")
 
+local HighlightSystem = require("game.systems.HighlightSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
 
 local Application = class {
@@ -21,6 +22,7 @@ local Application = class {
     self.camera = Camera(self.INTERNAL_RES_W / 2, self.INTERNAL_RES_H / 2, scaleFactor)
 
     self.cosmos = Cosmos()
+    self.cosmos:addSystems("update", HighlightSystem(self.camera))
     self.cosmos:addSystems("draw", RenderingSystem())
 
     self.cosmos:spawn({
