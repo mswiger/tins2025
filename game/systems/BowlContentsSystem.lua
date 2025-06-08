@@ -2,7 +2,7 @@ local collision = require("game.util.collision")
 
 local BowlContentsSystem = class {
   query = {
-    bowls = { "bowlContents", "progress", "position" },
+    bowls = { "contents", "progress", "position" },
     hand = { "hand" },
   },
 
@@ -22,8 +22,8 @@ local BowlContentsSystem = class {
         bowl.position.y,
         bowl.drawable:getWidth(),
         bowl.drawable:getHeight()
-      ) and bowl.progress.value < 100 then
-        table.insert(bowl.bowlContents, hand.holding)
+      ) and bowl.progress.value < 100 and bowl.name == "bowl" then
+        table.insert(bowl.contents, hand.holding)
         bowl.progress.value = math.min(100, bowl.progress.value + 10)
       end
     end

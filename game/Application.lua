@@ -4,6 +4,7 @@ local BowlBundle = require("game.bundles.BowlBundle")
 local HandBundle = require("game.bundles.HandBundle")
 local IngredientBundle = require("game.bundles.IngredientBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
+local TinBundle = require("game.bundles.TinBundle")
 
 local BowlContentsSystem = require("game.systems.BowlContentsSystem")
 local GrabSystem = require("game.systems.GrabSystem")
@@ -62,6 +63,7 @@ local Application = class {
     end
 
     self.cosmos:spawn(BowlBundle(self.assets, counter[1]))
+    self.cosmos:spawn(TinBundle(self.assets, counter[2]))
 
     local PANTRY_STORAGE_W = 62
     local PANTRY_STORAGE_H = 42
