@@ -5,6 +5,7 @@ local HandBundle = require("game.bundles.HandBundle")
 local IngredientBundle = require("game.bundles.IngredientBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
 local TinBundle = require("game.bundles.TinBundle")
+local TrashBundle = require("game.bundles.TrashBundle")
 
 local BowlContentsSystem = require("game.systems.BowlContentsSystem")
 local GrabSystem = require("game.systems.GrabSystem")
@@ -88,6 +89,8 @@ local Application = class {
     self.cosmos:spawn(IngredientBundle(self.assets, "sugar", pantry[2]))
     self.cosmos:spawn(IngredientBundle(self.assets, "butter", pantry[5]))
     self.cosmos:spawn(IngredientBundle(self.assets, "eggs", pantry[6]))
+
+    self.cosmos:spawn(TrashBundle(self.assets, 516, 281))
   end,
 
   update = function(self, dt)

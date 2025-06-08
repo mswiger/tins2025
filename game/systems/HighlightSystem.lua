@@ -14,7 +14,7 @@ local HighlightSystem = class {
       local w = entity.drawable:getWidth()
       local h = entity.drawable:getHeight()
 
-      if collision.isPointInBox(mx, my, entity.position.x, entity.position.y, w, h) then
+      if entity.highlightable and collision.isPointInBox(mx, my, entity.position.x, entity.position.y, w, h) then
         entity.drawable = entity.highlightDrawable
       else
         entity.drawable = entity.regularDrawable
