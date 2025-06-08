@@ -11,6 +11,13 @@ local function BowlBundle(assets, x, y)
       x = x,
       y = y,
     },
+    progress = {
+      value = 0,
+      orientation = "vertical",
+      offsetX = 85,
+      offsetY = 3,
+      size = 50,
+    },
   }
 end
 

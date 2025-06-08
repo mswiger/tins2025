@@ -3,6 +3,7 @@ local AssetManager = require("game.AssetManager")
 local BowlBundle = require("game.bundles.BowlBundle")
 
 local HighlightSystem = require("game.systems.HighlightSystem")
+local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
 
 local Application = class {
@@ -23,7 +24,7 @@ local Application = class {
 
     self.cosmos = Cosmos()
     self.cosmos:addSystems("update", HighlightSystem(self.camera))
-    self.cosmos:addSystems("draw", RenderingSystem())
+    self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem())
 
     self.cosmos:spawn({
       name = "background",
