@@ -1,5 +1,9 @@
 local AssetManager = require("game.AssetManager")
 
+local BowlBundle = require("game.bundles.BowlBundle")
+
+local RenderingSystem = require("game.systems.RenderingSystem")
+
 local Application = class {
   INTERNAL_RES_W = 640,
   INTERNAL_RES_H = 360,
@@ -18,6 +22,9 @@ local Application = class {
     self.camera = Camera(self.INTERNAL_RES_W / 2, self.INTERNAL_RES_H / 2, scaleFactor)
 
     self.cosmos = Cosmos()
+    self.cosmos:addSystems("draw", RenderingSystem())
+
+    self.cosmos:spawn(BowlBundle(self.assets, 40, 143))
   end,
 
   update = function(self, dt)

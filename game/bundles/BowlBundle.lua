@@ -1,0 +1,12 @@
+local function BowlBundle(assets, x, y)
+  return {
+    drawable = assets:get("assets/bowl.png"),
+    layer = 1,
+    position = {
+      x = x,
+      y = y,
+    },
+  }
+end
+
+return BowlBundle
