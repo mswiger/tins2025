@@ -31,6 +31,10 @@ local Application = class {
 
     self.assets = AssetManager()
 
+    self.music = self.assets:get("assets/Jahzzar - Bloom.mp3")
+    self.music:setLooping(true)
+    self.music:play()
+
     local scaleFactor = math.min(
       love.graphics.getWidth() / self.INTERNAL_RES_W,
       love.graphics.getHeight() / self.INTERNAL_RES_H
