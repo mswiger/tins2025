@@ -6,6 +6,7 @@ local function BowlBundle(assets, storage)
   storage.storage.filled = true
   return {
     name = "bowl",
+    bowl = true,
     drawable = drawable,
     regularDrawable = drawable,
     highlightDrawable = assets:get("assets/bowl-hover.png"),
@@ -23,7 +24,7 @@ local function BowlBundle(assets, storage)
       size = 50,
     },
     grabbable = {
-      cursor = love.mouse.newCursor("assets/bowl.png"),
+      cursor = love.mouse.newCursor("assets/bowl.png", nil, 20),
       storageType = "counter",
       storageId = storage.storage.id,
     },
