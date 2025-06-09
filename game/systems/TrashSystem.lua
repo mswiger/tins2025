@@ -6,13 +6,13 @@ local TrashSystem = class {
     trash = { "trash", "position" },
   },
 
-  process = function(_, entities, _, x, y)
+  init = function(self, assets)
+    self.assets = assets
+  end,
+
+  process = function(self, entities, _, x, y)
     local heldItem = entities.held[1]
     local trash = entities.trash[1]
-
-    if heldItem == nil then
-      return
-    end
 
     if collision.isPointInBox(
       x,
@@ -22,9 +22,14 @@ local TrashSystem = class {
       trash.drawable:getWidth(),
       trash.drawable:getHeight()
     ) then
-      heldItem.contents = {}
-      if heldItem.progress then
-        heldItem.progress.value = 0
+      if not heldItem then
+        love.audio.play(self.assets:get("assets/error.wav"))
+      else
+        heldItem.contents = {}
+        if heldItem.progress then
+          heldItem.progress.value = 0
+        end
+        love.audio.play(self.assets:get("assets/trash.ogg"))
       end
     end
 

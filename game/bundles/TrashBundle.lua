@@ -5,7 +5,7 @@ local function TrashBundle(assets, x, y)
     drawable = drawable,
     regularDrawable = drawable,
     highlightDrawable = assets:get("assets/trash-hover.png"),
-    highlightable = false,
+    highlightable = true,
     position = {
       x = x,
       y = y,

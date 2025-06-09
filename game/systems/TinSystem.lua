@@ -10,15 +10,19 @@ end
 
 local TinSystem = class {
   query = {
-    bowl = { "grabbable", "held", "contents", "bowl" },
+    bowl = { "grabbable", "held" },
     tin = { "tin", "contents", "position" },
   },
 
-  process = function(_, entities, _, x, y)
+  init = function(self, assets)
+    self.assets = assets
+  end,
+
+  process = function(self, entities, _, x, y)
     local bowl = entities.bowl[1]
     local tin = entities.tin[1]
 
-    if not tin or not bowl or #tin.contents > 0 or #bowl.contents == 0 then
+    if not tin or not bowl then
       return
     end
 
@@ -30,6 +34,13 @@ local TinSystem = class {
       tin.drawable:getWidth(),
       tin.drawable:getHeight()
     ) then
+      if not bowl.bowl or #tin.contents > 0 or #bowl.contents == 0 then
+        love.audio.play(self.assets:get("assets/error.wav"))
+        return
+      end
+
+      love.audio.play(self.assets:get("assets/batter.ogg"))
+
       local counts = {}
       for _, ingredient in ipairs(bowl.contents) do
         if counts[ingredient] == nil then
