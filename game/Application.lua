@@ -1,10 +1,13 @@
 local AssetManager = require("game.AssetManager")
 
 local BowlBundle = require("game.bundles.BowlBundle")
+local CharacterBundle = require("game.bundles.CharacterBundle")
 local HandBundle = require("game.bundles.HandBundle")
 local IngredientBundle = require("game.bundles.IngredientBundle")
 local OvenDoorBundle = require("game.bundles.OvenDoorBundle")
 local PlateBundle = require("game.bundles.PlateBundle")
+local RequestBundle = require("game.bundles.RequestBundle")
+local SpeechBubbleBundle = require("game.bundles.SpeechBubbleBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
 local TinBundle = require("game.bundles.TinBundle")
 local TrashBundle = require("game.bundles.TrashBundle")
@@ -18,14 +21,19 @@ local PlateContentsSystem = require("game.systems.PlateContentsSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
 local OvenDoorSystem = require("game.systems.OvenDoorSystem")
+local SpeechBubbleSystem = require("game.systems.SpeechBubbleSystem")
 local TinSystem = require("game.systems.TinSystem")
 local TrashSystem = require("game.systems.TrashSystem")
+
+local request = require("game.util.request")
 
 local Application = class {
   INTERNAL_RES_W = 640,
   INTERNAL_RES_H = 360,
 
   init = function(self)
+    math.randomseed(os.time())
+
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setBackgroundColor(0.17, 0.12, 0.19)
 
@@ -58,7 +66,7 @@ local Application = class {
       PlateContentsSystem(self.assets)
     )
     self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets))
-    self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem())
+    self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem(), SpeechBubbleSystem(self.assets))
 
     self.cosmos:spawn({
       name = "background",
@@ -120,6 +128,12 @@ local Application = class {
     self.cosmos:spawn(TrashBundle(self.assets, 516, 281))
 
     self.cosmos:spawn(OvenDoorBundle(self.assets, 360, 220))
+
+    local requestLayerCount = request.randLayers()
+    self.cosmos:spawn(RequestBundle(requestLayerCount))
+
+    self.cosmos:spawn(CharacterBundle(self.assets, 479, 80))
+    self.cosmos:spawn(SpeechBubbleBundle(self.assets, 413, 48, requestLayerCount .. " layers plz"))
   end,
 
   update = function(self, dt)
