@@ -1,4 +1,5 @@
 local requestUtil = require("game.util.request")
+local TextBundle  = require("game.bundles.TextBundle")
 
 local RequestFulfillmentSystem = class {
   query = {
@@ -8,7 +9,7 @@ local RequestFulfillmentSystem = class {
     speech = { "speech" },
   },
 
-  process = function(_, entities)
+  process = function(_, entities, commands)
     local plate = entities.plate[1]
     local request = entities.request[1].request
     local speechBubble = entities.speech[1]
@@ -51,9 +52,17 @@ local RequestFulfillmentSystem = class {
         elseif perfectIngredients == #plate.contents then
           speechBubble.speech = "it's perfect! <3"
           request.fulfilled = true
+
+          local winText = TextBundle("You won! Perfect score!\nClick to continue . . .", 105, 65, { 1, 1, 1 }, 22)
+          winText.interstitial = true
+          commands:spawn(winText)
         else
           speechBubble.speech = "not bad, thanks"
           request.fulfilled = true
+
+          local winText = TextBundle("Not perfect, but nice!\nClick to continue . . .", 105, 65, { 1, 1, 1 }, 22)
+          winText.interstitial = true
+          commands:spawn(winText)
         end
       end
     else

@@ -9,6 +9,7 @@ local PlateBundle = require("game.bundles.PlateBundle")
 local RequestBundle = require("game.bundles.RequestBundle")
 local SpeechBubbleBundle = require("game.bundles.SpeechBubbleBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
+local TextBundle = require("game.bundles.TextBundle")
 local TinBundle = require("game.bundles.TinBundle")
 local TrashBundle = require("game.bundles.TrashBundle")
 
@@ -23,10 +24,9 @@ local RenderingSystem = require("game.systems.RenderingSystem")
 local OvenDoorSystem = require("game.systems.OvenDoorSystem")
 local RequestFulfillmentSystem = require("game.systems.RequestFulfillmentSystem")
 local SpeechBubbleSystem = require("game.systems.SpeechBubbleSystem")
+local TextRenderingSystem = require("game.systems.TextRenderingSystem")
 local TinSystem = require("game.systems.TinSystem")
 local TrashSystem = require("game.systems.TrashSystem")
-
-local request = require("game.util.request")
 
 local Application = class {
   INTERNAL_RES_W = 640,
@@ -67,7 +67,7 @@ local Application = class {
       PlateContentsSystem(self.assets)
     )
     self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets), RequestFulfillmentSystem)
-    self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem(), SpeechBubbleSystem(self.assets))
+    self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem(), SpeechBubbleSystem(self.assets), TextRenderingSystem(self.assets))
 
     self.cosmos:spawn({
       name = "background",
@@ -137,6 +137,8 @@ local Application = class {
 
     self.cosmos:spawn(CharacterBundle(self.assets, 479, 80))
     self.cosmos:spawn(SpeechBubbleBundle(self.assets, 413, 48, requestLayerCount .. " layers plz"))
+
+    self.cosmos:spawn(TextBundle("00:30", 512, 19, { 0.92, 0.15, 0.25 }, 18))
   end,
 
   update = function(self, dt)
@@ -153,9 +155,6 @@ local Application = class {
   draw = function(self)
     self.camera:attach()
     self.cosmos:emit("draw")
-    love.graphics.setFont(self.assets:get("assets/bitstream-vera-mono-bold.ttf", 18))
-    love.graphics.setColor(0.92, 0.15, 0.25)
-    love.graphics.print("00:30", 512, 19)
     love.graphics.setColor(1, 1, 1, 1)
     self.camera:detach()
   end,
