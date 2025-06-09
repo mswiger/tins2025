@@ -12,6 +12,8 @@ local GrabSystem = require("game.systems.GrabSystem")
 local HighlightSystem = require("game.systems.HighlightSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
+local TrashHighlightSystem = require("game.systems.TrashHighlightSystem")
+local TrashSystem = require("game.systems.TrashSystem")
 
 local Application = class {
   INTERNAL_RES_W = 640,
@@ -36,8 +38,8 @@ local Application = class {
     self.camera = Camera(self.INTERNAL_RES_W / 2, self.INTERNAL_RES_H / 2, scaleFactor)
 
     self.cosmos = Cosmos()
-    self.cosmos:addSystems("primaryAction", BowlContentsSystem(), GrabSystem())
-    self.cosmos:addSystems("update", HighlightSystem(self.camera))
+    self.cosmos:addSystems("primaryAction", BowlContentsSystem(), GrabSystem(), TrashSystem())
+    self.cosmos:addSystems("update", TrashHighlightSystem(), HighlightSystem(self.camera))
     self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem())
 
     self.cosmos:spawn({

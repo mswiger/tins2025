@@ -1,6 +1,7 @@
 local function TrashBundle(assets, x, y)
   local drawable = assets:get("assets/trash.png")
   return {
+    name = "trash",
     drawable = drawable,
     regularDrawable = drawable,
     highlightDrawable = assets:get("assets/trash-hover.png"),
@@ -10,6 +11,7 @@ local function TrashBundle(assets, x, y)
       y = y,
     },
     layer = 1,
+    trash = true,
   }
 end
 
