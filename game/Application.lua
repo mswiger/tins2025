@@ -100,6 +100,12 @@ local Application = class {
       self.cosmos:spawn(pantryBundle)
     end
 
+    local OVEN_STORAGE_W = 91
+    local OVEN_STORAGE_H = 28
+    local ovenStorage = StorageBundle(365, 272, OVEN_STORAGE_W, OVEN_STORAGE_H, "oven", "the-oven")
+    ovenStorage.available = false
+    self.cosmos:spawn(ovenStorage)
+
     self.cosmos:spawn(IngredientBundle(self.assets, "flour", pantry[1]))
     self.cosmos:spawn(IngredientBundle(self.assets, "sugar", pantry[2]))
     self.cosmos:spawn(IngredientBundle(self.assets, "butter", pantry[5]))

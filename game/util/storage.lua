@@ -4,4 +4,19 @@ local function computeStoragePos(storage, drawable)
   return x, y
 end
 
-return { computeStoragePos = computeStoragePos }
+local function validStorage(itemStorageType, storageType)
+  if type(itemStorageType) == "table" then
+    for _, t in ipairs(itemStorageType) do
+      if t == storageType then return true end
+    end
+    return false
+  else
+    return itemStorageType == storageType
+  end
+end
+
+
+return {
+  computeStoragePos = computeStoragePos,
+  validStorage = validStorage,
+}

@@ -1,5 +1,6 @@
 local function StorageBundle(x, y, width, height, type, id)
   return {
+    available = true,
     position = {
       x = x,
       y = y,

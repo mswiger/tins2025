@@ -16,7 +16,7 @@ local function OvenDoorBundle(assets, x, y)
       x = x,
       y = y,
     },
-    layer = 1,
+    layer = 2,
   }
 end
 

@@ -26,10 +26,10 @@ local GrabSystem = class {
           item.position.y,
           item.drawable:getWidth(),
           item.drawable:getHeight()
-        ) then
+        ) and not item.grabbable.locked then
           for _, itemStorage in ipairs(entities.storage) do
             if itemStorage.storage.id == item.grabbable.storageId and
-               itemStorage.storage.type == item.grabbable.storageType
+               storageUtil.validStorage(item.grabbable.storageType, itemStorage.storage.type)
             then
               itemStorage.storage.filled = false
             end
@@ -52,7 +52,7 @@ local GrabSystem = class {
           itemStorage.position.y,
           itemStorage.size.width,
           itemStorage.size.height
-        ) and itemStorage.storage.type == heldItem.grabbable.storageType then
+        ) and storageUtil.validStorage(heldItem.grabbable.storageType, itemStorage.storage.type) and itemStorage.available then
           local sx, sy = storageUtil.computeStoragePos(itemStorage, heldItem.drawable)
           itemStorage.storage.filled = true
           hand.holding = nil

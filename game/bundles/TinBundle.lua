@@ -27,7 +27,7 @@ local function TinBundle(assets, storage)
     },
     grabbable = {
       cursor = love.mouse.newCursor("assets/tin.png"),
-      storageType = "counter",
+      storageType = { "counter", "oven" },
       storageId = storage.storage.id,
     },
     contents = {},
