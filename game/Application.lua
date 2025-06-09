@@ -26,6 +26,7 @@ local OvenDoorSystem = require("game.systems.OvenDoorSystem")
 local RequestFulfillmentSystem = require("game.systems.RequestFulfillmentSystem")
 local SpeechBubbleSystem = require("game.systems.SpeechBubbleSystem")
 local TextRenderingSystem = require("game.systems.TextRenderingSystem")
+local TimerSystem = require("game.systems.TimerSystem")
 local TinSystem = require("game.systems.TinSystem")
 local TrashSystem = require("game.systems.TrashSystem")
 
@@ -68,7 +69,7 @@ local Application = class {
       TinSystem(self.assets),
       PlateContentsSystem(self.assets)
     )
-    self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets), RequestFulfillmentSystem)
+    self.cosmos:addSystems("update", TimerSystem(), BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets), RequestFulfillmentSystem)
     self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem(), SpeechBubbleSystem(self.assets), TextRenderingSystem(self.assets))
 
     self.cosmos:spawn({
@@ -139,7 +140,10 @@ local Application = class {
     self.cosmos:spawn(CharacterBundle(self.assets, 479, 80))
     self.cosmos:spawn(SpeechBubbleBundle(self.assets, 413, 48, ""))
 
-    self.cosmos:spawn(TextBundle("00:30", 512, 19, { 0.92, 0.15, 0.25 }, 18))
+    local timer = TextBundle("", 512, 19, { 0.92, 0.15, 0.25 }, 18)
+    timer.timer = true
+    timer.time = 20
+    self.cosmos:spawn(timer)
   end,
 
   update = function(self, dt)

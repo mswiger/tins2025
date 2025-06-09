@@ -53,14 +53,28 @@ local RequestFulfillmentSystem = class {
           speechBubble.speech = "it's perfect! <3"
           request.fulfilled = true
 
-          local winText = TextBundle("You won! Perfect score!\nClick to continue . . .", 105, 65, { 1, 1, 1 }, 22)
+          local contents = "You won! Perfect score!"
+          if request.layers == 8 then
+            contents = contents .. "\nYou beat the game!"
+          else
+            contents = contents .. "\nClick to continue . . ."
+          end
+
+          local winText = TextBundle(contents, 105, 65, { 1, 1, 1 }, 22)
           winText.interstitial = true
           commands:spawn(winText)
         else
           speechBubble.speech = "not bad, thanks"
           request.fulfilled = true
 
-          local winText = TextBundle("Not perfect, but nice!\nClick to continue . . .", 105, 65, { 1, 1, 1 }, 22)
+          local contents = "No perfect, but nice!"
+          if request.layers == 8 then
+            contents = contents .. "\nYou beat the game!"
+          else
+            contents = contents .. "\nClick to continue . . ."
+          end
+
+          local winText = TextBundle(contents, 105, 65, { 1, 1, 1 }, 22)
           winText.interstitial = true
           commands:spawn(winText)
         end

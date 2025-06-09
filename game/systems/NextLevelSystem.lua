@@ -8,6 +8,7 @@ local NextLevelSystem = class {
     text = { "text" },
     plate = { "plate" },
     storage = { "storage" },
+    timer = { "timer" },
   },
 
   init = function(self, assets)
@@ -17,14 +18,22 @@ local NextLevelSystem = class {
   process = function(self, entities, commands)
     local request = entities.request[1].request
     local plate = entities.plate[1]
+    local timer = entities.timer[1]
 
-    if request.fulfilled then
+    if request.fulfilled or request.failed then
       if request.layers == 8 then
         love.event.quit()
       end
-      request.fulfilled = false
-      request.previousLayers = request.layers
-      request.layers = request.layers + request.previousLayers
+      if request.failed then
+        request.failed = false
+        request.previousLayers = 1
+        request.layers = 1
+      else
+        request.fulfilled = false
+        request.previousLayers = request.layers
+        request.layers = request.layers + request.previousLayers
+      end
+      timer.time = math.max(request.layers * 13, 20)
 
       for _, textEntity in ipairs(entities.text) do
         if textEntity.interstitial then
