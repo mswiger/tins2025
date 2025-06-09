@@ -11,8 +11,10 @@ local TrashBundle = require("game.bundles.TrashBundle")
 
 local BakingSystem = require("game.systems.BakingSystem")
 local BowlContentsSystem = require("game.systems.BowlContentsSystem")
+local EmptyPlateSystem = require("game.systems.EmptyPlateSystem")
 local GrabSystem = require("game.systems.GrabSystem")
 local HighlightSystem = require("game.systems.HighlightSystem")
+local PlateContentsSystem = require("game.systems.PlateContentsSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
 local OvenDoorSystem = require("game.systems.OvenDoorSystem")
@@ -52,9 +54,10 @@ local Application = class {
       GrabSystem(),
       OvenDoorSystem(self.assets),
       TrashSystem(self.assets),
-      TinSystem(self.assets)
+      TinSystem(self.assets),
+      PlateContentsSystem(self.assets)
     )
-    self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera))
+    self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets))
     self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem())
 
     self.cosmos:spawn({

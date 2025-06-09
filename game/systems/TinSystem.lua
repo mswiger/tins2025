@@ -50,11 +50,11 @@ local TinSystem = class {
       end
 
       if counts.sugar == 2 and counts.flour == 2 and counts.butter == 2 and counts.eggs == 1 then
-        tin.contents = { "perfect" }
+        tin.contents = { ingredients = "perfect" }
       elseif okay(counts.sugar) and okay(counts.flour) and okay(counts.butter) and okay(counts.eggs, 2) then
-        tin.contents = { "okay" }
+        tin.contents = { ingredients = "okay" }
       else
-        tin.contents = { "disaster" }
+        tin.contents = { ingredients = "disaster" }
       end
 
       tin.progress.value = 1

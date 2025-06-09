@@ -15,8 +15,17 @@ local function validStorage(itemStorageType, storageType)
   end
 end
 
+local function findStorage(grabbable, entities)
+  for _, e in ipairs(entities) do
+    if e.storage.type == grabbable.storageType and e.storage.id == grabbable.storageId then
+      return e
+    end
+  end
+  return nil
+end
 
 return {
   computeStoragePos = computeStoragePos,
   validStorage = validStorage,
+  findStorage = findStorage,
 }
