@@ -48,6 +48,7 @@ local OvenDoorSystem = class {
           if storageUtil.validStorage(item.grabbable.storageType, "oven") and item.grabbable.storageId == ovenStorage.storage.id then
             item.highlightable = true
             item.grabbable.locked = false
+            item.baking = false
           end
         end
       else
@@ -59,6 +60,7 @@ local OvenDoorSystem = class {
           if storageUtil.validStorage(item.grabbable.storageType, "oven") and item.grabbable.storageId == ovenStorage.storage.id then
             item.highlightable = false
             item.grabbable.locked = true
+            item.baking = true
           end
         end
       end

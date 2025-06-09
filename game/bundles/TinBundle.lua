@@ -31,6 +31,7 @@ local function TinBundle(assets, storage)
       storageId = storage.storage.id,
     },
     contents = {},
+    baking = false,
   }
 end
 
