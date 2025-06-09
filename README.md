@@ -6,6 +6,7 @@ Experiment with the kitchen tools to make the cake to the correct specifications
 ingredients and be baked correctly in order for Cookie to accept it.
 
 Present 5 correctly baked cakes to Cookie to win the game.
+![Screenshot_20250609_023351](https://github.com/user-attachments/assets/8f1bd764-fe2e-415f-94ea-5a4d57538109)
 
 ## Controls
 The mouse (with left click) controls the entire game.
