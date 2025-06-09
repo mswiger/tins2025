@@ -21,6 +21,7 @@ local PlateContentsSystem = require("game.systems.PlateContentsSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
 local OvenDoorSystem = require("game.systems.OvenDoorSystem")
+local RequestFulfillmentSystem = require("game.systems.RequestFulfillmentSystem")
 local SpeechBubbleSystem = require("game.systems.SpeechBubbleSystem")
 local TinSystem = require("game.systems.TinSystem")
 local TrashSystem = require("game.systems.TrashSystem")
@@ -65,7 +66,7 @@ local Application = class {
       TinSystem(self.assets),
       PlateContentsSystem(self.assets)
     )
-    self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets))
+    self.cosmos:addSystems("update", BakingSystem(), HighlightSystem(self.camera), EmptyPlateSystem(self.assets), RequestFulfillmentSystem)
     self.cosmos:addSystems("draw", RenderingSystem(), ProgressBarSystem(), SpeechBubbleSystem(self.assets))
 
     self.cosmos:spawn({
@@ -131,7 +132,7 @@ local Application = class {
 
     self.cosmos:spawn(OvenDoorBundle(self.assets, 360, 220))
 
-    local requestLayerCount = request.randLayers()
+    local requestLayerCount = 1
     self.cosmos:spawn(RequestBundle(requestLayerCount))
 
     self.cosmos:spawn(CharacterBundle(self.assets, 479, 80))
