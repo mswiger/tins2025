@@ -11,14 +11,14 @@ local function PlateBundle(assets, storage)
     regularDrawable = drawable,
     highlightDrawable = assets:get("assets/plate-hover.png"),
     highlightable = true,
-    layer = 1,
+    layer = 2,
     position = {
       x = x,
       y = y,
     },
     grabbable = {
       cursor = love.mouse.newCursor("assets/plate.png"),
-      storageType = "counter",
+      storageType = { "counter", "window" },
       storageId = storage.storage.id,
     },
     contents = {},

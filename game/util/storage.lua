@@ -17,7 +17,7 @@ end
 
 local function findStorage(grabbable, entities)
   for _, e in ipairs(entities) do
-    if e.storage.type == grabbable.storageType and e.storage.id == grabbable.storageId then
+    if validStorage(grabbable.storageType, e.storage.type) and e.storage.id == grabbable.storageId then
       return e
     end
   end

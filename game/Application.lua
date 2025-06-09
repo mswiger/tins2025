@@ -125,6 +125,8 @@ local Application = class {
     self.cosmos:spawn(IngredientBundle(self.assets, "butter", pantry[5]))
     self.cosmos:spawn(IngredientBundle(self.assets, "eggs", pantry[6]))
 
+    self.cosmos:spawn(StorageBundle(479, 80, 121, 120, "window", "the-window"))
+
     self.cosmos:spawn(TrashBundle(self.assets, 516, 281))
 
     self.cosmos:spawn(OvenDoorBundle(self.assets, 360, 220))
