@@ -143,6 +143,10 @@ local Application = class {
   end,
 
   update = function(self, dt)
+    if love.keyboard.isDown("escape") then
+      love.event.quit()
+    end
+
     self.input:update()
 
     if self.input:pressed("primaryAction") then
