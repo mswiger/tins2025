@@ -6,6 +6,7 @@ local function TinBundle(assets, storage)
   storage.storage.filled = true
   return {
     name = "tin",
+    tin = true,
     drawable = drawable,
     regularDrawable = drawable,
     highlightDrawable = assets:get("assets/tin-hover.png"),
