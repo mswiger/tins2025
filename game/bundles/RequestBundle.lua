@@ -1,7 +1,8 @@
-local function RequestBundle(layers)
+local function RequestBundle()
   return {
     request = {
-      layers = layers,
+      layers = 1,
+      previousLayers = 1,
       fulfilled = false,
     }
   }

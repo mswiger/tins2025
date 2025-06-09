@@ -24,8 +24,18 @@ local function findStorage(grabbable, entities)
   return nil
 end
 
+local function emptyStorageFor(type, storageEntities)
+  for _, storageEntity in ipairs(storageEntities) do
+    if validStorage(type, storageEntity.storage.type) and not storageEntity.storage.filled then
+      return storageEntity
+    end
+  end
+  return nil
+end
+
 return {
   computeStoragePos = computeStoragePos,
   validStorage = validStorage,
   findStorage = findStorage,
+  emptyStorageFor = emptyStorageFor,
 }

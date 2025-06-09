@@ -57,7 +57,7 @@ local PlateContentsSystem = class {
       plate.drawable:getWidth(),
       plate.drawable:getHeight()
     ) and plate.name == "plate" then
-      if hand.holding ~= "tin" or tin.contents.ingredients == nil or tin.contents.bake == nil or #plate.contents == 8 then
+      if hand.holding ~= "tin" or tin.contents.ingredients == nil or tin.contents.bake == nil or #plate.contents == 8 or plate.grabbable.storageId == "the-window" then
         love.audio.play(self.assets:get("assets/error.wav"))
       else
         love.audio.play(self.assets:get("assets/ingredient.ogg"):clone())

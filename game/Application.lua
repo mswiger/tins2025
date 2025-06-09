@@ -18,6 +18,7 @@ local BowlContentsSystem = require("game.systems.BowlContentsSystem")
 local EmptyPlateSystem = require("game.systems.EmptyPlateSystem")
 local GrabSystem = require("game.systems.GrabSystem")
 local HighlightSystem = require("game.systems.HighlightSystem")
+local NextLevelSystem = require("game.systems.NextLevelSystem")
 local PlateContentsSystem = require("game.systems.PlateContentsSystem")
 local ProgressBarSystem = require("game.systems.ProgressBarSystem")
 local RenderingSystem = require("game.systems.RenderingSystem")
@@ -59,6 +60,7 @@ local Application = class {
     self.cosmos = Cosmos()
     self.cosmos:addSystems(
       "primaryAction",
+      NextLevelSystem(self.assets),
       BowlContentsSystem(self.assets),
       GrabSystem(),
       OvenDoorSystem(self.assets),
@@ -132,11 +134,10 @@ local Application = class {
 
     self.cosmos:spawn(OvenDoorBundle(self.assets, 360, 220))
 
-    local requestLayerCount = 1
-    self.cosmos:spawn(RequestBundle(requestLayerCount))
+    self.cosmos:spawn(RequestBundle())
 
     self.cosmos:spawn(CharacterBundle(self.assets, 479, 80))
-    self.cosmos:spawn(SpeechBubbleBundle(self.assets, 413, 48, requestLayerCount .. " layers plz"))
+    self.cosmos:spawn(SpeechBubbleBundle(self.assets, 413, 48, ""))
 
     self.cosmos:spawn(TextBundle("00:30", 512, 19, { 0.92, 0.15, 0.25 }, 18))
   end,
