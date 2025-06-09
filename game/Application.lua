@@ -1,8 +1,10 @@
 local AssetManager = require("game.AssetManager")
+local OvenDoorSystem = require("game.systems.OvenDoorSystem")
 
 local BowlBundle = require("game.bundles.BowlBundle")
 local HandBundle = require("game.bundles.HandBundle")
 local IngredientBundle = require("game.bundles.IngredientBundle")
+local OvenDoorBundle = require("game.bundles.OvenDoorBundle")
 local StorageBundle = require("game.bundles.StorageBundle")
 local TinBundle = require("game.bundles.TinBundle")
 local TrashBundle = require("game.bundles.TrashBundle")
@@ -46,6 +48,7 @@ local Application = class {
       "primaryAction",
       BowlContentsSystem(self.assets),
       GrabSystem(),
+      OvenDoorSystem(self.assets),
       TrashSystem(self.assets),
       TinSystem(self.assets)
     )
@@ -103,6 +106,8 @@ local Application = class {
     self.cosmos:spawn(IngredientBundle(self.assets, "eggs", pantry[6]))
 
     self.cosmos:spawn(TrashBundle(self.assets, 516, 281))
+
+    self.cosmos:spawn(OvenDoorBundle(self.assets, 360, 220))
   end,
 
   update = function(self, dt)
