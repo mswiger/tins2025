@@ -30,10 +30,11 @@ local NextLevelSystem = class {
         request.layers = 1
       else
         request.fulfilled = false
+        local newLayerRequest = request.layers + request.previousLayers
         request.previousLayers = request.layers
-        request.layers = request.layers + request.previousLayers
+        request.layers = newLayerRequest
       end
-      timer.time = math.max(request.layers * 13, 20)
+      timer.time = 20 + (request.layers - 1) * 13
 
       for _, textEntity in ipairs(entities.text) do
         if textEntity.interstitial then
